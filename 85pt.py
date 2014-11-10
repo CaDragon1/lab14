@@ -54,7 +54,11 @@ class MyApp:
 		global drawpad
 		global drawpadwidth
 		global drawpadheight
-		drawpad.move(oval,-10,0)
+	        x1, y1, x2, y2 = drawpad.coords(oval)
+                if x1 <= 0:
+	           drawpad.move(oval,0,0)
+	        else:
+		   drawpad.move(oval,-10,0)
 	
 	# Add the button2Click method
 	def button2Click(self, event):
@@ -62,7 +66,10 @@ class MyApp:
 	   global drawpad
 	   global drawpadwidth
 	   global drawpadheight
-	   if x1 > 0:
+	   x1, y1, x2, y2 = drawpad.coords(oval)
+           if x2 >= drawpad.winfo_width():
+	       drawpad.move(oval,0,0)
+	   else:
 	       drawpad.move(oval,10,0)
 		
 myapp = MyApp(root)
