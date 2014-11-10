@@ -46,6 +46,7 @@ class MyApp:
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,0,-20)
 		global targetx1, targety1, targetx2, targety2
 
 
