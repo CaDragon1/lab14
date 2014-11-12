@@ -5,7 +5,7 @@
 #########################################
 
 # Animate the target area to bounce from left to right.
-# Add in buttons for movement left, right, up and down
+# # Add in buttons for movement left, right, up and down
 # Add in boundary detection for the edges (don't let the player move off screen)
 # Add in colision detection - and STOP the target when you catch it!
 
@@ -19,6 +19,7 @@ targetx2 = 280
 targety2 = 80
 target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="blue")
 player = drawpad.create_rectangle(240,240,260,260, fill="pink")
+didWeHit = False
 
 
 
@@ -73,34 +74,43 @@ class MyApp:
                 didWeHit = collisionDetect()
                 if(didWeHit == True):
                     # We made contact! Stop our animation!
-                    print "Do something"
+                    drawpad.itemconfig(target, fill = 'Red')
         def button2Click(self, event):   
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-                drawpad.move(player,-20,0)
+                if y1 <= 4:
+	           drawpad.move(oval,0,0)
+	        else:
+                    drawpad.move(player,-20,0)
 		global targetx1, targety1, targetx2, targety2
                 didWeHit = collisionDetect()
                 if(didWeHit == True):
-                    print "Do something"
+                    drawpad.itemconfig(target, fill = 'Red')
         def button3Click(self, event):   
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-                drawpad.move(player,20,0)
+                if x2 >= drawpad.winfo_width()-4:
+	           drawpad.move(oval,0,0)
+	        else:
+                    drawpad.move(player,20,0)
 		global targetx1, targety1, targetx2, targety2
                 didWeHit = collisionDetect()
                 if(didWeHit == True):
-                    print "Do something"
+                    drawpad.itemconfig(target, fill = 'Red')
         def button4Click(self, event):   
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-                drawpad.move(player,0,20)
+                if y2 >= drawpad.winfo_height()-4:
+	           drawpad.move(oval,0,0)
+	        else:
+                    drawpad.move(player,0,20)
 		global targetx1, targety1, targetx2, targety2
                 didWeHit = collisionDetect()
                 if(didWeHit == True):
-                    print "Do something"
+                    drawpad.itemconfig(target, fill = 'Red')
         
 	# Use a function to do our collision detection
 	# This way we only have to write it once, and call it from
@@ -112,7 +122,8 @@ class MyApp:
                 x1,y1,x2,y2 = drawpad.coords(player)
 
                 # Do your if statement - remember to return True if successful!
-                
+                if (x1 > targetx1 - 5 and x2 < targetx2 + 5) and (y1 > targety1 - 5 and y2 < targety2 + 25):
+                    didWeHit = True
 	    
 		
 myapp = MyApp(root)
