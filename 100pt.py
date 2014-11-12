@@ -6,7 +6,7 @@
 
 # Animate the target area to bounce from left to right.
 # # Add in buttons for movement left, right, up and down
-# Add in boundary detection for the edges (don't let the player move off screen)
+# # Add in boundary detection for the edges (don't let the player move off screen)
 # Add in colision detection - and STOP the target when you catch it!
 
 from Tkinter import *
@@ -20,6 +20,7 @@ targety2 = 80
 target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="blue")
 player = drawpad.create_rectangle(240,240,260,260, fill="pink")
 didWeHit = False
+direction = 1
 
 
 
@@ -126,9 +127,21 @@ class MyApp:
 
                 # Do your if statement - remember to return True if successful!
                 if (x1 > targetx1 - 5 and x2 < targetx2 + 5) and (y1 > targety1 - 5 and y2 < targety2 + 25):
-                    didWeHit = True
+                    return True
+                else:
+                    return False
 	    
-		
+        def animate():
+           global direction
+           x3, y3, x4, y4 = drawpad.coords(target)
+           if x4 > drawpad.winfo_width(): 
+                direction = - 1
+           elif x3 < 0:
+               direction = 1
+               drawpad.move(target,direction,0)
+               drawpad.after(1, animate)
+    
+animate()
 myapp = MyApp(root)
 
 root.mainloop()
