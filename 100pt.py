@@ -48,9 +48,9 @@ class MyApp:
 					
 		# "Bind" an action to the first button												
 		self.button1.bind("<Button-1>", self.button1Click)
-		self.button2.bind("<Button-2>", self.button1Click)
-		self.button3.bind("<Button-3>", self.button1Click)
-		self.button4.bind("<Button-4>", self.button1Click)
+		self.button2.bind("<Button-1>", self.button2Click)
+		self.button3.bind("<Button-1>", self.button3Click)
+		self.button4.bind("<Button-1>", self.button4Click)
 
 		  
 		# This creates the drawpad - no need to change this 
