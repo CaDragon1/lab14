@@ -51,7 +51,7 @@ class MyApp:
 
 
 		# Ensure that we are doing our collision detection
-		if (x1 > targetx1 and x2 < targetx2) and (y1 > targety1 and y2 < targety2):
+		if (x1 > targetx1 - 15 and x2 < targetx2 + 15) and (y1 > targety1 - 15 and y2 < targety2 + 15):
 		    drawpad.itemconfig(target, fill = 'Red')
 		else:
 		    drawpad.itemconfig(target, fill = 'Blue')

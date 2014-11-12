@@ -32,10 +32,25 @@ class MyApp:
 		
 		self.button1 = Button(self.myContainer1)
 		self.button1.configure(text="Up", background= "green")
-		self.button1.grid(row=0,column=0)
+		self.button1.grid(row=0,column=1)
+		
+		self.button2 = Button(self.myContainer1)
+		self.button2.configure(text="Left", background= "green")
+		self.button2.grid(row=1,column=0)
+		
+		self.button3 = Button(self.myContainer1)
+		self.button3.configure(text="Right", background= "green")
+		self.button3.grid(row=1,column=2)
+		
+		self.button4 = Button(self.myContainer1)
+		self.button4.configure(text="Down", background= "green")
+		self.button4.grid(row=2,column=1)
 					
 		# "Bind" an action to the first button												
 		self.button1.bind("<Button-1>", self.button1Click)
+		self.button2.bind("<Button-2>", self.button1Click)
+		self.button3.bind("<Button-3>", self.button1Click)
+		self.button4.bind("<Button-4>", self.button1Click)
 
 		  
 		# This creates the drawpad - no need to change this 
@@ -48,6 +63,8 @@ class MyApp:
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,0,-20)
+		global targetx1, targety1, targetx2, targety2
 		# Get the coords of our target
 
 
@@ -57,9 +74,38 @@ class MyApp:
                 if(didWeHit == True):
                     # We made contact! Stop our animation!
                     print "Do something"
+        def button2Click(self, event):   
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,-20,0)
+		global targetx1, targety1, targetx2, targety2
+                didWeHit = collisionDetect()
+                if(didWeHit == True):
+                    print "Do something"
+        def button3Click(self, event):   
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,20,0)
+		global targetx1, targety1, targetx2, targety2
+                didWeHit = collisionDetect()
+                if(didWeHit == True):
+                    print "Do something"
+        def button4Click(self, event):   
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,0,20)
+		global targetx1, targety1, targetx2, targety2
+                didWeHit = collisionDetect()
+                if(didWeHit == True):
+                    print "Do something"
+        
 	# Use a function to do our collision detection
 	# This way we only have to write it once, and call it from
 	# every button click function.
+	
 	def collisionDetect(self):
                 global oval
 		global drawpad
