@@ -64,7 +64,10 @@ class MyApp:
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-                drawpad.move(player,0,-20)
+                if y1 <= 4:
+	           drawpad.move(oval,0,0)
+	        else:
+                    drawpad.move(player,0,-20)
 		global targetx1, targety1, targetx2, targety2
 		# Get the coords of our target
 
@@ -79,7 +82,7 @@ class MyApp:
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-                if y1 <= 4:
+                if x1 <= 4:
 	           drawpad.move(oval,0,0)
 	        else:
                     drawpad.move(player,-20,0)
