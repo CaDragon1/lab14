@@ -68,7 +68,10 @@ class MyApp:
            elif x3 < 0:
                direction = 1
            drawpad.move(target,direction,0)
-           drawpad.after(1, animate)
+           drawpad.after(10, self.animate)
+           
+           animate()
+           root.mainloop()
     
 		
 	def button1Click(self, event):   
