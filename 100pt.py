@@ -140,13 +140,15 @@ class MyApp:
 	def collisionDetect(self):
                 global oval
 		global drawpad
+		global didWeHit
                 x1,y1,x2,y2 = drawpad.coords(player)
 
                 # Do your if statement - remember to return True if successful!
                 if (x1 > targetx1 - 5 and x2 < targetx2 + 5) and (y1 > targety1 - 5 and y2 < targety2 + 25):
-                    return True
+                    didWeHit = True
                 else:
-                    return False
+                    didWeHit = False
+                return didWeHit
 	    
 
 #animate()
