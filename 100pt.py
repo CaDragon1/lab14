@@ -57,21 +57,24 @@ class MyApp:
 		  
 		# This creates the drawpad - no need to change this 
 		drawpad.pack()
+		self.animate()
 		
-        def animate():
+        def animate(self):
            global drawpad
            global direction
            global target
            x3, y3, x4, y4 = drawpad.coords(target)
-           if x4 > drawpad.winfo_width(): 
-                direction = - 1
-           elif x3 < 0:
-               direction = 1
+           if x4 > drawpad.winfo_width() and didWeHit == False: 
+                direction = -3
+           elif x4 > drawpad.winfo_width() and didWeHit == True:
+               direction = 0
+           elif x3 < 0 and didWeHit == False:
+               direction = 3
+           elif x3 < 0 and didWeHit == True:
+               direction = 0
            drawpad.move(target,direction,0)
            drawpad.after(10, self.animate)
            
-           animate()
-           root.mainloop()
     
 		
 	def button1Click(self, event):   
