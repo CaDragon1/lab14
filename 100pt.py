@@ -58,7 +58,18 @@ class MyApp:
 		# This creates the drawpad - no need to change this 
 		drawpad.pack()
 		
-
+        def animate():
+           global drawpad
+           global direction
+           global target
+           x3, y3, x4, y4 = drawpad.coords(target)
+           if x4 > drawpad.winfo_width(): 
+                direction = - 1
+           elif x3 < 0:
+               direction = 1
+           drawpad.move(target,direction,0)
+           drawpad.after(1, animate)
+    
 		
 	def button1Click(self, event):   
                 # "global" makes sure that we can access our oval and our drawpad
@@ -131,17 +142,8 @@ class MyApp:
                 else:
                     return False
 	    
-        def animate():
-           global direction
-           x3, y3, x4, y4 = drawpad.coords(target)
-           if x4 > drawpad.winfo_width(): 
-                direction = - 1
-           elif x3 < 0:
-               direction = 1
-               drawpad.move(target,direction,0)
-               drawpad.after(1, animate)
-    
-animate()
+
+#animate()
 myapp = MyApp(root)
 
 root.mainloop()
