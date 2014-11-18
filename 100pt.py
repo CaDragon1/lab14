@@ -63,17 +63,28 @@ class MyApp:
            global drawpad
            global direction
            global target
+           global didWeHit
            x3, y3, x4, y4 = drawpad.coords(target)
            if x4 > drawpad.winfo_width() and didWeHit == False: 
                 direction = -3
            elif x4 > drawpad.winfo_width() and didWeHit == True:
                direction = 0
+               drawpad.itemconfig(target, fill = 'Blue')
+               didWeHit = False
            elif x3 < 0 and didWeHit == False:
                direction = 3
+               drawpad.itemconfig(target, fill = 'Blue')
+               didWeHit = False
            elif x3 < 0 and didWeHit == True:
                direction = 0
            drawpad.move(target,direction,0)
-           drawpad.after(10, self.animate)
+           didWeHit = self.collisionDetect()
+           if(didWeHit == True):
+                    drawpad.itemconfig(target, fill = 'Red')
+           else:
+               drawpad.after(10, self.animate)
+               drawpad.itemconfig(target, fill = 'Blue')
+               
            
     
 		
@@ -129,9 +140,7 @@ class MyApp:
 	        else:
                     drawpad.move(player,0,20)
 		global targetx1, targety1, targetx2, targety2
-                didWeHit = collisionDetect()
-                if(didWeHit == True):
-                    drawpad.itemconfig(target, fill = 'Red')
+
         
 	# Use a function to do our collision detection
 	# This way we only have to write it once, and call it from
@@ -142,7 +151,7 @@ class MyApp:
 		global drawpad
 		global didWeHit
                 x1,y1,x2,y2 = drawpad.coords(player)
-
+                targetx1,targety1,targetx2,targety2 = drawpad.coords(target)
                 # Do your if statement - remember to return True if successful!
                 if (x1 > targetx1 - 5 and x2 < targetx2 + 5) and (y1 > targety1 - 5 and y2 < targety2 + 25):
                     didWeHit = True
